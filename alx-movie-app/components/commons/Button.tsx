@@ -1,8 +1,22 @@
-import { ButtonProps } from "../../interfaces";
+import { ButtonProps } from "@/interfaces";
+import { ReactNode } from "react";
 
-const Button: React.FC<ButtonProps> = ({ title, action }) => {
+const Button: React.FC<ButtonProps> = ({ title, action, disabled = false, className = "", icon }) => {
   return (
-    <button onClick={action} className="px-8 py-2 border-2 border-[#E2D609] rounded-full hover:bg-[#E2D609] hover:text-black transition-colors duration-300">
+    <button 
+      onClick={action} 
+      disabled={disabled}
+      className={`
+        px-6 py-3 rounded-xl font-medium transition-all duration-300
+        flex items-center justify-center gap-2
+        ${disabled 
+          ? 'opacity-50 cursor-not-allowed bg-gray-700' 
+          : 'hover:scale-105 active:scale-95'
+        }
+        ${className}
+      `}
+    >
+      {icon && <span className="text-lg">{icon}</span>}
       {title}
     </button>
   )
